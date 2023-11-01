@@ -34,6 +34,7 @@ class ToDoTile extends StatelessWidget {
                       ? TextDecoration.lineThrough
                       : TextDecoration.none,
                   fontWeight: FontWeight.w500,
+                  fontSize: 17,
                 ))
           ],
         ),
