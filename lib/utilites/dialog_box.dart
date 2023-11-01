@@ -3,8 +3,15 @@ import 'package:to_do_app/utilites/button.dart';
 
 class DialogBox extends StatelessWidget {
   final controller;
+  VoidCallback onSave;
+  VoidCallback onCancel;
 
-  const DialogBox({super.key, required this.controller});
+  DialogBox({
+    super.key,
+    required this.controller,
+    required this.onSave,
+    required this.onCancel,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +31,15 @@ class DialogBox extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Button(text: "save", onPressed: () {},),
+                Button(
+                  text: "save",
+                  onPressed: onSave,
+                ),
                 const SizedBox(width: 30),
-                Button(text: "cancel", onPressed: () {})
+                Button(
+                  text: "cancel",
+                  onPressed: onCancel,
+                )
               ],
             )
           ],

@@ -22,12 +22,29 @@ class _ToDoPageState extends State<ToDoPage> {
     });
   }
 
+  void saveNewTask() {
+    setState(() {
+      toDoList.add([controller.text, false]);
+      controller.clear();
+    });
+    Navigator.of(context).pop();
+  }
+
   void createNewTask() {
     showDialog(
         context: context,
         builder: (context) {
-          return DialogBox(controller: controller);
+          return DialogBox(
+              controller: controller,
+              onSave: saveNewTask,
+              onCancel: () => Navigator.of(context).pop());
         });
+  }
+
+  void deleteTask(int index) {
+    setState(() {
+      toDoList.removeAt(index);
+    });
   }
 
   @override
@@ -41,7 +58,7 @@ class _ToDoPageState extends State<ToDoPage> {
           elevation: 0,
         ),
         floatingActionButton: FloatingActionButton(
-          elevation: 0,
+            elevation: 0,
             onPressed: createNewTask,
             child: Icon(
               Icons.add,
@@ -51,9 +68,11 @@ class _ToDoPageState extends State<ToDoPage> {
           itemCount: toDoList.length,
           itemBuilder: (context, index) {
             return ToDoTile(
-                taskName: toDoList[index][0],
-                taskCompleted: toDoList[index][1],
-                onChanged: (value) => checkBoxChanged(value, index));
+              taskName: toDoList[index][0],
+              taskCompleted: toDoList[index][1],
+              onChanged: (value) => checkBoxChanged(value, index),
+              deleteFunction: (context) => deleteTask(index),
+            );
           },
         ));
   }
