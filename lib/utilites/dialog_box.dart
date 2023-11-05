@@ -18,6 +18,10 @@ class DialogBox extends StatelessWidget {
     return AlertDialog(
       backgroundColor: Colors.teal.shade200,
       elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius:
+            BorderRadius.circular(12),
+      ),
       content: Container(
         height: 120,
         child: Column(
